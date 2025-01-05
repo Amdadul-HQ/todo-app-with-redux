@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux'
 import './App.css'
 import { decrement, increment } from './Redux/features/counter/counterSlice';
 import { useAppSelector } from './Redux/features/hook';
+import { Button } from './components/ui/button';
 
 function App() {
   const dispatch = useDispatch();
@@ -19,15 +20,15 @@ function App() {
   return (
     <div>
      <h1>Counter with Redux</h1>
-     <button onClick={handleIncrement}>
+     <Button onClick={handleIncrement}>
       Increment
-      </button>
+      </Button>
      <div>
       {count}
      </div>
-     <button onClick={handleDecrement}>
+     <Button onClick={handleDecrement}>
       Decrement
-     </button>
+     </Button>
     </div>
   )
 }
