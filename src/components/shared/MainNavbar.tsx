@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { ModeToggle } from "../mode-toggle";
 
 const MainNavbar = () => {
     return (
@@ -7,6 +8,9 @@ const MainNavbar = () => {
             <div className="flex gap-x-4">
                 <NavLink to='/'>Task</NavLink>
                 <NavLink to='/users'>Users</NavLink>
+            </div>
+            <div>
+                <ModeToggle/>
             </div>
         </nav>
     );
