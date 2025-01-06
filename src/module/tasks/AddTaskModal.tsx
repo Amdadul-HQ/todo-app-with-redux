@@ -2,45 +2,54 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
+import { useForm } from "react-hook-form";
 
 export function AddTaskModal() {
+    const form = useForm()
+    const onsubmit = (data) =>{
+        console.log(data);
+    }
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Edit Profile</Button>
+        <Button variant="outline">Add Task</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
+        <DialogDescription className="sr-only">Fill up this form to add task</DialogDescription>
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
-          </DialogDescription>
+            <DialogTitle>
+                Add Task
+            </DialogTitle>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Name
-            </Label>
-            <Input id="name" value="Pedro Duarte" className="col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Username
-            </Label>
-            <Input id="username" value="@peduarte" className="col-span-3" />
-          </div>
-        </div>
+       <Form {...form}>
+        <form onSubmit={form.handleSubmit(onsubmit)}>
+        <FormField
+            control={form.control}
+            name="title"
+            render={({field}) => (
+                <FormItem>
+                <FormLabel />
+                <FormControl>
+                <Input {...field}/>
+                </FormControl>
+                <FormDescription />
+                <FormMessage />
+            </FormItem>
+            )}
+        />
         <DialogFooter>
           <Button type="submit">Save changes</Button>
         </DialogFooter>
+        </form>
+        </Form>
+
       </DialogContent>
     </Dialog>
   );

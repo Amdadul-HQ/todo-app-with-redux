@@ -13,7 +13,7 @@ const Task = () => {
             </div>
             <div className="space-y-5 mt-5">
                 {
-                    tasks.map(task =><TaskCard task={task}/>)
+                    tasks.map(task =><TaskCard key={task.id} task={task}/>)
                 }
             </div>
         </div>
