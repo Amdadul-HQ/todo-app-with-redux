@@ -1,15 +1,16 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom';
 import './App.css'
+import MainNavbar from './components/shared/MainNavbar';
 
 
 
 function App() {
 
   return (
-    <>
-      <NavBar />
-      <Outlet />
-    </>
+    <main className="max-w-screen-xl mx-auto">
+    <MainNavbar/>
+    <Outlet/>
+    </main>
   );
 }
 
