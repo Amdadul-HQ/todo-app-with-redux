@@ -10,9 +10,11 @@ import {
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { useAppDispatch } from "@/Redux/features/hook";
+import { addTask } from "@/Redux/features/task/taskSlice";
 import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
@@ -20,8 +22,12 @@ import { useForm } from "react-hook-form";
 
 export function AddTaskModal() {
     const form = useForm()
+
+    const dispatch = useAppDispatch();
+
     const onsubmit = (data) =>{
         console.log(data);
+        dispatch(addTask(data))
     }
   return (
     <Dialog>
@@ -67,20 +73,6 @@ export function AddTaskModal() {
             />
             <FormField
               control={form.control}
-              name="dueDate"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Due Date</FormLabel>
-                  <FormControl>
-                    <Textarea {...field} value={field.value || ""} />
-                  </FormControl>
-                  <FormDescription />
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
               name="priority"
               render={({ field }) => (
                 <FormItem>
@@ -90,7 +82,7 @@ export function AddTaskModal() {
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
-                      <SelectTrigger className="w-[180px]">
+                      <SelectTrigger className="w-full">
                         <SelectValue placeholder="Select a fruit" />
                       </SelectTrigger>
                       <SelectContent>
@@ -109,17 +101,17 @@ export function AddTaskModal() {
             />
             <FormField
               control={form.control}
-              name="dob"
+              name="dueDate"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>Date of birth</FormLabel>
+                  <FormLabel>Due Date</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
                         <Button
                           variant={"outline"}
                           className={cn(
-                            "w-[240px] pl-3 text-left font-normal",
+                            " pl-3 text-left font-normal",
                             !field.value && "text-muted-foreground"
                           )}
                         >
@@ -152,7 +144,7 @@ export function AddTaskModal() {
               )}
             />
             <DialogFooter>
-              <Button type="submit">Save changes</Button>
+              <Button className="mt-5" type="submit">Save changes</Button>
             </DialogFooter>
           </form>
         </Form>
